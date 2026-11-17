@@ -49,7 +49,7 @@ The cheaper build used 20-word summaries with no lead-in, thinking off while wri
 ## What the failures were
 
 - **Classic, Q7 (generation failure).** The chunk holding the answer was retrieved at rank 2, and the model refused. The chunk never named the book, and a chapter in the other book discussed the same topic with a different answer. Chunking dropped the book and chapter names. This repeated in the replay. Untested fix: prefix each chunk with its book and chapter.
-- **PageIndex first build, Q5 (retrieval failure).** The question mentioned a "ledger" without naming a book. The search matched the word in four section titles in the wrong book and never reached the right one. The cheaper build found it. A likely reason, not tested: its summaries state the figures the question asks about, so the question's words had something to match.
+- **PageIndex first build, Q5 (retrieval failure).** The question mentioned a "ledger" without naming a book. The search matched the word to a Book 1 section titled "Two expense lines, one ledger", picked four Book 1 sections, and never reached the right one in Book 2. The cheaper build found it. A likely reason, not tested: its summaries state the figures the question asks about, so the question's words had something to match.
 - **PageIndex, Q7.** Correct with search thinking on, half-correct with it off.
 - **Unanswerable questions.** No system invented an answer. With search thinking on, one PageIndex run refused one of them for the wrong reason: the search selected no sections.
 

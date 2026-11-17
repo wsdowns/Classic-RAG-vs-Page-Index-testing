@@ -22,11 +22,12 @@ ANS = {  # every group must match (case-insensitive)
  "Q7": [r"partner", r"own what is durable|rent what is common|durable and specific"],
  "Q8": [r"measured win|before-and-after|before and after", r"level 1|proven"],
 }
+UNANSWERABLE = {"Q9", "Q10"}   # questions whose correct behavior is to decline; list your own ids here
 DECLINE = r"do not have enough information|does not (?:specify|state|provide|name|list|give|recommend)|do not (?:specify|state)|not (?:specified|stated|named|listed)|no (?:specific )?(?:size|recommendation)|does not mention"
 def relevant(qid, text):
     return qid in FACT and re.search(FACT[qid], text, re.I) is not None
 def correct(qid, answer):
-    if qid in ("Q9", "Q10"):
+    if qid in UNANSWERABLE:
         return re.search(DECLINE, answer, re.I) is not None
     return all(re.search(g, answer, re.I) for g in ANS[qid])
 def retrieval(qid, texts):

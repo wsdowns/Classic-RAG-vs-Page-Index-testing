@@ -5,7 +5,8 @@ Two Colab notebooks, one question set. Run the same questions through both and c
 | Notebook | Method |
 |---|---|
 | `notebooks/classic_rag.ipynb` | Cut the documents into fixed-size chunks, embed them, retrieve the closest few for each question. |
-| `notebooks/pageindex_tree_retrieval.ipynb` | Build a tree from the documents' headings, summarize each section, let a model read the tree and pick the sections that hold the answer. |
+| `notebooks/pageindex_first_build.ipynb` | The first, more expensive PageIndex build (40-word summaries, thinking on). Same steps as the cheaper notebook; use it to reproduce the first run. |
+| `notebooks/pageindex_tree_retrieval.ipynb` | The cheaper rebuild (20-word summaries, tree cached, search with thinking off and on). Build a tree from the documents' headings, summarize each section, let a model read the tree and pick the sections that hold the answer. |
 
 ## Before you start
 
@@ -48,7 +49,7 @@ Tips for a good test set:
 
 Change one setting at a time and re-run from Step 4 so you know what caused a difference.
 
-**PageIndex notebook, Step 2 cell:**
+**PageIndex notebook, Step 2 cell** (defaults shown are for the cheaper `pageindex_tree_retrieval.ipynb`; the first-build notebook has `SUMMARY_WORDS = 40`, no `SUMMARY_THINK` switch, and no thinking-off/on search variants):
 
 | Setting | Default | Meaning |
 |---|---|---|
